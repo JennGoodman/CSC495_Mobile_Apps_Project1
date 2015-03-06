@@ -28,6 +28,10 @@
             android:name=".ViewContact"
             android:label="@string/title_activity_view_contact" >
         </activity>
+        <activity
+            android:name=".SearchContacts"
+            android:label="@string/title_activity_search_contacts" >
+        </activity>
     </application>
 
 </manifest>
