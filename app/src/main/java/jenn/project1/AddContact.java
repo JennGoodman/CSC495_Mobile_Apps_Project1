@@ -22,6 +22,7 @@ public class AddContact extends ActionBarActivity {
     EditText contactName;
     EditText emailAddress;
     Spinner contactClass;
+
     private final String fileName = "project1_contacts";
 
     @Override
@@ -44,29 +45,23 @@ public class AddContact extends ActionBarActivity {
             FileOutputStream fOut = openFileOutput(fileName, MODE_APPEND);
             OutputStreamWriter osw = new OutputStreamWriter(fOut);
 
-            osw.write(contactName.getText().toString()
-                    + " | "
-                    + emailAddress.getText().toString()
-                    + " | "
-                    + contactClass.getSelectedItem().toString()
-                    + "\n");
+            osw.write(contactName.getText().toString() + "|"
+                    + emailAddress.getText().toString() + "|"
+                    + contactClass.getSelectedItem().toString() + "\n");
             osw.flush();
             osw.close();
-
         }
         catch (IOException e) { e.printStackTrace(); }
-
-        finish();
+        finally { finish(); }
     }
 
-    public void onClickCancel (View v) {
-        finish();
-    }
+    public void onClickCancel (View v) { finish(); }
 
     protected void onResume() {
         super.onResume();
 
         ArrayList<String> lines = new ArrayList<>();
+        String line;
 
         try {
             BufferedReader reader = new BufferedReader(
@@ -74,10 +69,7 @@ public class AddContact extends ActionBarActivity {
                             new FileInputStream(
                                     this.getFilesDir().getPath() + "/project1_classes"), "UTF-8"));
 
-            String line;
-
             lines.add("Select a Class...");
-
             while ((line = reader.readLine()) != null) { lines.add(line); }
 
             reader.close();

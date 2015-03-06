@@ -14,12 +14,14 @@ public class AddClass extends ActionBarActivity {
 
     private EditText className;
     private EditText classNumber;
+
     private final String fileName = "project1_classes";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_class);
+
         className = (EditText) findViewById(R.id.txtClassName);
         classNumber = (EditText) findViewById(R.id.txtClassNumber);
     }
@@ -29,20 +31,14 @@ public class AddClass extends ActionBarActivity {
             FileOutputStream fOut = openFileOutput(fileName, MODE_APPEND);
             OutputStreamWriter osw = new OutputStreamWriter(fOut);
 
-            osw.write(className.getText().toString()
-                    + "-"
-                    + classNumber.getText().toString()
-                    + "\n");
+            osw.write(className.getText().toString() + "-"
+                    + classNumber.getText().toString() + "\n");
             osw.flush();
             osw.close();
-
         }
         catch (IOException e) { e.printStackTrace(); }
-
-        finish();
+        finally { finish(); }
     }
 
-    public void onClickCancel (View v) {
-        finish();
-    }
+    public void onClickCancel (View v) { finish(); }
 }
